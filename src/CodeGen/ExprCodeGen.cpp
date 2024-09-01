@@ -294,7 +294,7 @@ LLVMValue* generateNullishCoalescing(LLVMValue* lhs, LLVMValue* rhs, llvm::IRBui
         llvm::StructType *sType = llvm::dyn_cast<llvm::StructType>(lhs->getType());
         if(sType->hasName()) {
             llvm::StringRef typeName = sType->getName();
-            if(typeName == "struct.type_string") {
+            if(typeName == "struct._string") {
                 llvm::Value* result = builder.CreateCall(BuiltinString::stringSizeFunc, lhs, "call_string_size");
                 lhsIsNull = builder.CreateICmpEQ(result, llvm::ConstantInt::get(llvm::Type::getInt64Ty(context), 0), "cmp_zero");
             } else {
@@ -308,7 +308,7 @@ LLVMValue* generateNullishCoalescing(LLVMValue* lhs, LLVMValue* rhs, llvm::IRBui
         llvm::StructType *structType = llvm::dyn_cast<llvm::StructType>(elementType);
         if(structType->hasName()) {
             llvm::StringRef typeName = structType->getName();
-            if(typeName == "struct.type_string") {
+            if(typeName == "struct._string") {
                 llvm::Value* result = builder.CreateCall(BuiltinString::stringSizeFunc, lhs, "call_string_size");
                 lhsIsNull = builder.CreateICmpEQ(result, llvm::ConstantInt::get(llvm::Type::getInt64Ty(context), 0), "cmp_zero");
             } else {
